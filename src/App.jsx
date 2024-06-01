@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-import clsx from "clsx";
-import css from "./App.module.css";
+// import css from "./App.module.css";
+// import clsx from "clsx";
 
 import About from "./pages/About/About";
 import HomePage from "./pages/Home/HomePage";
@@ -12,14 +12,10 @@ import Navigation from "./components/Navigation/Navigation";
 const MovieDetailsPage = lazy(() =>
   import("./pages/MovieDetailsPage/MovieDetailsPage")
 );
-// const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
-// const MovieReviews = lazy(() =>
-//   import("./components/MovieReviews/MovieReviews")
-// );
-
-// const buildLinkClass = ({ isActive }) => {
-//   return clsx(css.link, isActive && css.active);
-// };
+const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
+const MovieReviews = lazy(() =>
+  import("./components/MovieReviews/MovieReviews")
+);
 
 export const App = () => {
   return (
@@ -30,8 +26,8 @@ export const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<MoviesPage />} />
           <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-            {/* <Route path="cast" element={<MovieCast />} />
-            <Route path="reviews" element={<MovieReviews />} /> */}
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
           </Route>
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFoundPage />} />

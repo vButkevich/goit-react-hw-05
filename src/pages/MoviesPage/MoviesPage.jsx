@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import { searchMovies } from "../../api";
-// import MovieList from "../../components/MovieList/MovieList";
+import { searchMovies } from "../../api/api";
+import MovieList from "../../components/MovieList/MovieList";
 import styles from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
@@ -9,7 +9,7 @@ const MoviesPage = () => {
 
   const handleSearch = async (event) => {
     event.preventDefault();
-    const data = []; //await searchMovies(query);
+    const data = await searchMovies(query);
     setMovies(data);
   };
 
@@ -24,7 +24,7 @@ const MoviesPage = () => {
         />
         <button type="submit">Search</button>
       </form>
-      {/* <MovieList movies={movies} /> */}
+      <MovieList movies={movies} />
     </div>
   );
 };

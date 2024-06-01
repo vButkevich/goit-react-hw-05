@@ -1,30 +1,48 @@
-import React, { useState } from "react";
-import styles from "./MovieDetailsPage.module.css";
+// src/pages/MovieDetailsPage/MovieDetailsPage.jsx
+import React, { useEffect, useState, Suspense, lazy } from "react";
+import { useParams, Link, Outlet } from "react-router-dom";
+import { fetchMovieDetails } from "../../api/api";
+import css from "./MovieDetailsPage.module.css";
 
-const MoviesDetailsPage = () => {
-  // const [query, setQuery] = useState("");
-  // const [movies, setMovies] = useState([]);
+const MovieCast = lazy(() => import("../../components/MovieCast/MovieCast"));
+const MovieReviews = lazy(() =>
+  import("../../components/MovieReviews/MovieReviews")
+);
 
-  // const handleSearch = async (event) => {
-  //   event.preventDefault();
-  //   const data = []; //await searchMovies(query);
-  //   setMovies(data);
-  // };
+const MovieDetailsPage = () => {
+  const { movieId } = useParams();
+  const [movie, setMovie] = useState(null);
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      const data = await fetchMovieDetails(movieId);
+      setMovie(data);
+    };
+    fetchDetails();
+  }, [movieId]);
 
   return (
-    <div className={styles.container}>
-      {/* <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search movies..."
-        />
-        <button type="submit">Search</button>
-      </form>
-      <MovieList movies={movies} /> */}
+    <div className={css.container}>
+      {movie && (
+        <>
+          <Link to="/">Go to HomePage</Link>
+          <h1>{movie.title}</h1>
+          <p>{movie.overview}</p>
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+          />
+          <nav>
+            <Link to="cast">Cast</Link>
+            <Link to="reviews">Reviews</Link>
+          </nav>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+          </Suspense>
+        </>
+      )}
     </div>
   );
 };
 
-export default MoviesDetailsPage;
+export default MovieDetailsPage;

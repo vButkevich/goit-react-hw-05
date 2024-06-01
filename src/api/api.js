@@ -1,14 +1,15 @@
 import axios from "axios";
+console.log("api.load :>> // @ij#W$tRCLgaz8n");
 
-// @ij#W$tRCLgaz8n
-
-const API_KEY = "your_api_key";
+const bearer_token =
+  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZDhjYjRhMjE0OGVjODUzODQ4MDVkZGJkNjExMGUyNyIsInN1YiI6IjY2NWIxNDM0Nzg1NGEwZjkxNzEwMzU4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.v1ujo4TTOWG8pQb4EToClARNvdN7K-v3ZEWNTcm11eU";
+const api_key = "8d8cb4a2148ec85384805ddbd6110e27";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 const instance = axios.create({
   baseURL: BASE_URL,
   headers: {
-    Authorization: `Bearer ${API_KEY}`,
+    Authorization: bearer_token,
   },
 });
 
@@ -19,7 +20,12 @@ export const fetchTrendingMovies = async () => {
 
 export const searchMovies = async (query) => {
   const response = await instance.get("/search/movie", {
-    params: { query, language: "en-US", page: 1, include_adult: false },
+    params: {
+      query,
+      page: 1,
+      language: "en-US",
+      include_adult: true,
+    },
   });
   return response.data.results;
 };
