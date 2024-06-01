@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./MoviesDetailsPage.module.css";
+import styles from "./MovieDetailsPage.module.css";
 
 const MoviesDetailsPage = () => {
   // const [query, setQuery] = useState("");
