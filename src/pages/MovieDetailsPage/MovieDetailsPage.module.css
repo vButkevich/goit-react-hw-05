@@ -1,0 +1,28 @@
+/* src/pages/MovieDetailsPage/MovieDetailsPage.module.css */
+.container {
+  padding: 20px;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.nav {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+.link {
+  /* margin-right: 10px; */
+  text-decoration: none;
+  color: #000;
+}
+
+.activeLink {
+  font-weight: bold;
+  color: #007bff;
+}

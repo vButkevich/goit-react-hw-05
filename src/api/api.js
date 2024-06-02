@@ -1,5 +1,4 @@
 import axios from "axios";
-console.log("api.load :>> // @ij#W$tRCLgaz8n");
 
 const bearer_token =
   "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZDhjYjRhMjE0OGVjODUzODQ4MDVkZGJkNjExMGUyNyIsInN1YiI6IjY2NWIxNDM0Nzg1NGEwZjkxNzEwMzU4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.v1ujo4TTOWG8pQb4EToClARNvdN7K-v3ZEWNTcm11eU";

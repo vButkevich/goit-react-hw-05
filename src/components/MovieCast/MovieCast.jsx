@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovieCredits } from "../../api/api";
-import styles from "./MovieCast.module.css";
+import css from "./MovieCast.module.css";
 
 const MovieCast = () => {
   const { movieId } = useParams();
@@ -16,12 +16,12 @@ const MovieCast = () => {
   }, [movieId]);
 
   return (
-    <div className={styles.container}>
+    <div className={css.container}>
       <h2>Cast</h2>
 
-      <ul className={styles.list}>
+      <ul className={css.list}>
         {cast.map((actor) => (
-          <li key={actor.cast_id} className={styles.item}>
+          <li key={actor.cast_id} className={css.item}>
             <img
               src={`https://media.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`}
               alt={actor.name}

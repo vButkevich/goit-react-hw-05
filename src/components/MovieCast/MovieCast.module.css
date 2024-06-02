@@ -1,0 +1,23 @@
+/* src/components/MovieReviews/MovieReviews.module.css */
+.container {
+  padding: 20px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.item {
+  /* margin-bottom: 20px; */
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}

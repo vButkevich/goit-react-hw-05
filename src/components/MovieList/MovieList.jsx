@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 import styles from "./MovieList.module.css";
 
 const MovieList = ({ movies }) => {
-  console.log("movies :>> ", movies);
   const location = useLocation();
 
   const base_path = "https://image.tmdb.org/t/p/w500";
