@@ -1,6 +1,6 @@
 // src/pages/MovieDetailsPage/MovieDetailsPage.jsx
-import React, { useEffect, useState, Suspense, lazy } from "react";
-import { useParams, Link, Outlet } from "react-router-dom";
+import { useEffect, useState, useRef, Suspense, lazy } from "react";
+import { useParams, useLocation, Link, Outlet } from "react-router-dom";
 import { fetchMovieDetails } from "../../api/api";
 import css from "./MovieDetailsPage.module.css";
 
@@ -10,8 +10,12 @@ const MovieReviews = lazy(() =>
 );
 
 const MovieDetailsPage = () => {
-  const { movieId } = useParams();
+  const location = useLocation();
+  const backLinkHref = useRef(location.state?.pathname ?? "/movies");
+  // console.log("backLinkHref :>> ", backLinkHref);
+  // console.log("location :>> ", location);
   const [movie, setMovie] = useState(null);
+  const { movieId } = useParams();
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -25,7 +29,10 @@ const MovieDetailsPage = () => {
     <div className={css.container}>
       {movie && (
         <>
-          <Link to="/">Go to HomePage</Link>
+          {/* <Link to="/">Go to HomePage</Link> */}
+          <Link to={backLinkHref.current} className={css.backLink}>
+            Go back
+          </Link>
           <h1>{movie.title}</h1>
           <p>{movie.overview}</p>
           <img

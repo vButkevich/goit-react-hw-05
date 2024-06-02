@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 // import css from "./App.module.css";
 // import clsx from "clsx";
 
-import About from "./pages/About/About";
+// import About from "./pages/About/About";
 import HomePage from "./pages/Home/HomePage";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
@@ -29,7 +29,7 @@ export const App = () => {
             <Route path="cast" element={<MovieCast />} />
             <Route path="reviews" element={<MovieReviews />} />
           </Route>
-          <Route path="/about" element={<About />} />
+          {/* <Route path="/about" element={<About />} /> */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>

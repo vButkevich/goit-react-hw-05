@@ -19,12 +19,11 @@ const Navigation = () => {
         Movies
       </NavLink>
 
-      <NavLink
-        to="/about"
-        className={({ isActive }) => (isActive ? styles.active : styles.link)}
-      >
+      {/*
+      <NavLink to="/about" className={({ isActive }) => (isActive ? styles.active : styles.link)}>
         About
       </NavLink>
+      */}
     </nav>
   );
 };
