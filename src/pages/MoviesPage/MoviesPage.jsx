@@ -11,6 +11,23 @@ const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    const fetcMovies = async () => {
+      if (query === "") {
+        setMovies([]);
+        return;
+      }
+
+      try {
+        const data = await searchMovies(query);
+        setMovies(data);
+      } catch (error) {
+        setError("Failed to fetch movies. Please try again later.");
+      }
+    };
+    fetcMovies();
+  }, [query]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const query = searchQuery.trim();
@@ -21,26 +38,22 @@ const MoviesPage = () => {
     setSearchParams({ query: query });
     setSearchQuery("");
     setError(null);
-
-    try {
-      const data = await searchMovies(query);
-      setMovies(data);
-    } catch (error) {
-      setError("Failed to fetch movies. Please try again later.");
-    }
   };
 
   return (
     <div className={css.container}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={css.form}>
         <input
           type="text"
           name="query"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search movies..."
+          className={css.input}
         />
-        <button type="submit">Search</button>
+        <button type="submit" className={css.button}>
+          Search
+        </button>
       </form>
       {error && <p className={css.error}>{error}</p>}
       <MovieList movies={movies} />
