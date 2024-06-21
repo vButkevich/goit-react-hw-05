@@ -10,9 +10,16 @@ const MovieReviews = lazy(() =>
 
 const MovieDetailsPage = () => {
   const location = useLocation();
-  const backLinkRef = useRef(location.state?.pathname ?? "/movies");
+  const backLinkRef = useRef(
+    // location.state?.pathname + location.state?.search ?? "/movies"
+    location.state ?? "/movies"
+  );
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
+
+  console.log("MovieDetailsPage-location :>> ", location);
+  console.log("MovieDetailsPage-location.state :>> ", location.state);
+  console.log("MovieDetailsPage-location.current :>> ", location.current);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -25,6 +32,7 @@ const MovieDetailsPage = () => {
   return (
     <div className={css.container}>
       <NavLink to={backLinkRef.current} className={css.backLink}>
+        {/* <NavLink to={location.state} className={css.backLink}> */}
         Go back
       </NavLink>
       {movie && (

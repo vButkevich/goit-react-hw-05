@@ -1,53 +1,74 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchMovies } from "../../api/api";
 import MovieList from "../../components/MovieList/MovieList";
 import css from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get("query") || "";
+  const [params, setParams] = useSearchParams();
+  const query = params.get("query") || "";
   const [searchQuery, setSearchQuery] = useState(query);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState(null);
+
+  // console.log("searchParams :>> ", params);
+  // console.log("searchParams.q :>> ", params.get("query"));
 
   useEffect(() => {
+    console.log("useEffect :>> ");
     const fetcMovies = async () => {
       if (query === "") {
         setMovies([]);
         return;
       }
-
       try {
+        setIsLoading(true);
         const data = await searchMovies(query);
         setMovies(data);
       } catch (error) {
-        setError("Failed to fetch movies. Please try again later.");
+        setError(true);
+        console.log("Failed to fetch movies. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
     };
     fetcMovies();
-  }, [query]);
+    // }, [query]);
+  }, [searchQuery]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const query = searchQuery.trim();
+    // console.log("(e.target.value :>> ", e.target.value);
+    const query = params.get("query") ?? "";
     if (query === "") {
       setError("Please enter a valid search query.");
       return;
     }
-    setSearchParams({ query: query });
-    setSearchQuery("");
+    setSearchQuery(query);
+    // setParams({ query: query });
+    // setSearchQuery("");
     setError(null);
   };
 
+  const handleChange = ({ target: { value } }) => {
+    console.log("handleChange.value :>> ", value);
+    // setSearchQuery(value);
+    params.set("query", value);
+    setParams(params);
+  };
   return (
     <div className={css.container}>
       <form onSubmit={handleSubmit} className={css.form}>
         <input
           type="text"
           name="query"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          // value={query}
+          value={params.get("query") ?? ""}
+          onChange={handleChange}
+          // value={searchQuery}
+          // onChange={(e) => setSearchQuery(e.target.value)}
+          //value={searchParams.get("query")}
           placeholder="Search movies..."
           className={css.input}
         />

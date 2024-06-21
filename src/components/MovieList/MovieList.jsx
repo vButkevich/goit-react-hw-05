@@ -5,6 +5,7 @@ import styles from "./MovieList.module.css";
 
 const MovieList = ({ movies }) => {
   const location = useLocation();
+  console.log("MovieList.location :>> ", location);
 
   const base_path = "https://image.tmdb.org/t/p/w500";
   return (
